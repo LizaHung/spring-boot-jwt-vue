@@ -1,12 +1,13 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/layout/Home";
+import Layout from "../views/layout/Layout";
 import routerUrl from "./RouterUrl";
 
 Vue.use(VueRouter);
 
-function recursiveFn(routeConfig, parent){
-  return routeConfig.map(item=>{
+function recursiveFn(routeConfig, parent, routeData){
+  routeConfig.forEach(item=>{
+
     let config = {path: item.path,meta:{fnName:item.fnName}}
     let name = item.path.split("/").slice(1).join("-")
     config.name = name
@@ -20,26 +21,23 @@ function recursiveFn(routeConfig, parent){
         return import(`@/views/${parent.name}/${item.localFile}`) 
       }
     }
-    console.log('localFile---',localFile)
     config.component = localFile
-    config.meta.breadcrumb = !parent ? [] : JSON.parse(JSON.stringify(parent.meta.breadcrumb))
-
-    if(item.breadcrumb) config.meta.breadcrumb.push(item.breadcrumb)
-    if(item.operates) recursiveFn(item.operates,config)
-    return config
+    routeData.push(config)
+    if(item.operates) recursiveFn(item.operates,config,routeData)
   })
 }
 
 const routeSetting = (routeConfig) =>{
-  console.log('test',recursiveFn(routeConfig))
-  return recursiveFn(routeConfig)
+  let routeData = []
+  recursiveFn(routeConfig,null,routeData)
+  return routeData
 }
 
 const routes = [
   {
     path: "/",
-    name: "Home",  //When registering a component, it will always be given a name. (規定: (all-lowercase, must contain a hyphen). )
-    component: Home,
+    name: "Layout",  //When registering a component, it will always be given a name. (規定: (all-lowercase, must contain a hyphen). )
+    component: Layout,
     children: [
       // {
       //   path: "/about",
