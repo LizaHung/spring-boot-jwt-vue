@@ -6,8 +6,13 @@ const modalAction = {
       callback(res);
     });
   },
+  confirm(adoPetNo, callback) {
+    apiAdoption.confirmApplication(adoPetNo, res => {
+      callback(res);
+    });
+  },
   getAllPets(param,callback) {
-    apiAdoption.getAllPetsByStatus(param, res => {
+    apiAdoption.getAllByStatus(param, res => {
       callback(res);
     });
   },

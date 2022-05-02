@@ -59,7 +59,12 @@
               ></b-form-textarea>
               <b-input-group class="mb-3" v-else-if="field.type === 'date'">
                 <b-input-group-prepend>
-                  <b-form-datepicker v-model="field.value" button-only right></b-form-datepicker>
+                  <b-form-datepicker
+                    v-model="field.value"
+                    button-only
+                    right
+                    :date-disabled-fn="dateDisabled"
+                  ></b-form-datepicker>
                 </b-input-group-prepend>
                 <b-form-input
                   required

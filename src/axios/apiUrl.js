@@ -8,6 +8,7 @@ export const apiAdoption = {
     updateAdopet:  (param, callback) => put('/api/adoption/adopets', callback, param ),
     deleteAdopet:  (adoPetNo, callback) => delhandle(`/api/adoption/adopets/${adoPetNo}`, callback ),
     updateAdoStatus:  (adoPetNo, param, callback) => patch(`/api/adoption/adopets/${adoPetNo}`, callback, param ),
+    confirmApplication:  (adoPetNo, callback) => patch(`/api/adoption/pdf/${adoPetNo}`, callback ),
 }
 export const apiEmployee = {
     getAllByParams:  (param,callback) => get(`/api/employees/searchEmp`, callback , param),

@@ -18,6 +18,7 @@
         :current-page="currentPage"
         hover
       >
+        <template #cell(index)="row">{{row.index + 1}}</template>
         <template #cell(photo)="data">
           <img
             style="width: 150px"
@@ -28,10 +29,8 @@
         <template #cell(petCat)="data"> {{ $store.getters.getConst.petCat[data.item.petCat] }} </template>
         <template #cell(location)="data"> {{ $store.getters.getConst.location[data.item.location] }} </template>
         <template #cell(action)="data">
-          <template>
             <b-button class="mr-1" variant="light" size="sm" @click="actionHandler(data.item, 'edit')"> 修改</b-button>
             <b-button class="mr-1" variant="light" size="sm" @click="actionHandler(data.item.adoPetNo, 'delete')">移除</b-button>
-          </template>
         </template>
       </b-table>
     </div>
@@ -55,7 +54,8 @@ export default {
     return {
       title: "寵物管理",
       tableField: [
-        { key: "adoPetNo", label: "序號" },
+        { key: "index", label: "序號" },
+        { key: "adoPetNo", label: "編號" },
         { key: "photo", label: "照片"},
         { key: "petType", label: "類別", formatter: value => { return value === 'DOG' ? '狗' : '貓' }},
         { key: "petName", label: "名稱" },

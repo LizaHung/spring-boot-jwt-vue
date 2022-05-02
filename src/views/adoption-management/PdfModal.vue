@@ -1,0 +1,22 @@
+<template>
+  <div>
+    <b-modal id="pdf-modal" hide-footer title="申請書">
+      <div class="d-block text-center">
+        <iframe :src="`http://localhost:7070/adoption/pdf/${adoPetNo}`" width="100%" height="450px" :title="`${adoPetNo}`"></iframe>
+      </div>
+    </b-modal>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    adoPetNo: {
+      type: Number,
+    },
+  },
+  data() {
+    return {};
+  },
+};
+</script>

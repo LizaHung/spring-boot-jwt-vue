@@ -15,7 +15,7 @@ const modalAction = {
     { param: "photos", label: "照片", value:null, isRequired:true, type:'photo'},
   ], 
   getAllPets(param,callback) {
-    apiAdoption.getAllPetsByStatus(param, res => {
+    apiAdoption.getAllByStatus(param, res => {
       callback(res);
     });
   },
