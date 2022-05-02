@@ -28,6 +28,10 @@ export default new Vuex.Store({
         TAOYUAN: '320桃園市中壢區中大路300號',
         TAICHUNG:'404台中市北區健行路490號',
         KAOHSIUNG:'812高雄市小港區松和路1號'
+      },
+      role:{
+        ROLE_ADMIN:'管理員',
+        ROLE_STAFF:'員工',
       }
     }
   },

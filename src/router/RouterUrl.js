@@ -12,5 +12,10 @@ const routerUrl = [
     fnName: "寵物管理",
     operates: [{ path: "/adopet/management/create", localFile: "CreateOrUpdatePet" }],
   },
+  {
+    path: "/employee/management",
+    fnName: "員工管理",
+    operates: [{ path: "/employee/management/create", localFile: "CreateOrUpdateEmp" }],
+  },
 ];
 export default routerUrl;
