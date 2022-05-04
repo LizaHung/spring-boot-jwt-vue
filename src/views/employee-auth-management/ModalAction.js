@@ -25,7 +25,12 @@ const modalAction = {
     apiEmployee[apiType](param, res=>{
         callback(res);
     })
-  }
+  },
+  authFunAction(apiType, param,callback) {
+    apiEmployee[apiType](param, res => {
+      callback(res);
+    });
+  },
 };
 
 export default modalAction;

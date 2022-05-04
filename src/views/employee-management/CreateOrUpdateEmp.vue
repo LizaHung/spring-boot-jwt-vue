@@ -18,14 +18,17 @@
                 :required="field.isRequired"
                 :name="field.param"
               ></b-form-input>
-              <b-form-select
+              <template   v-else-if="field.type === 'select'">
+                <strong>請留意:管理員預設啟用所有功能權限，員工預設啟用領養管理及寵物管理</strong>
+               <b-form-select
                 class="mb-3 custom-select"
                 :name="field.param"
-                v-else-if="field.type === 'select'"
                 v-model="field.value"
                 :required="field.isRequired"
                 :options="field.options">
               </b-form-select>
+              </template>
+             
               <b-form-group v-else-if="field.type === 'radio'" v-slot="{ ariaDescribedby }">
                 <b-form-radio-group
                   :name="field.param"
@@ -116,8 +119,8 @@ export default {
 
     this.mode = this.$route.params.mode;
     this.fields = JSON.parse(JSON.stringify(modalAction.fields));
-    this.modeSetting();
     this.fields[5].options = this.setOptions(this.getConst.role);
+    this.modeSetting();
   },
   computed: {
     ...mapGetters(["getConst"]),
@@ -133,11 +136,18 @@ export default {
           this.setInfoForEdit(this.$route.params.data);
         });
         this.apiType = "updateEmp";
-      } else this.apiType = "addEmp";
+        this.fields[0].isRequired = false
+      } else {
+        this.fields[5].value="ROLE_STAFF"
+        this.apiType = "addEmp";
+      }
     },
-    setInfoForEdit(petInfo) {
+    setInfoForEdit(empInfo) {
       this.fields.forEach((item) => {
-        item.value = petInfo[item.param];
+        if(item.param === 'empRole'){
+          item.value = empInfo[item.param] === '管理員' ? 'ROLE_ADMIN' : 'ROLE_STAFF'
+        }else
+          item.value = empInfo[item.param];
       });
     },
     setOptions(data) {
@@ -174,7 +184,6 @@ export default {
 
       let formData = new FormData();
       this.setFormData(formData);
-
       modalAction.addOrUpdateEmp(this.apiType, formData, () => {
         this.$router.push({
           name: "employee-management",

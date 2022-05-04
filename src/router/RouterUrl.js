@@ -17,5 +17,10 @@ const routerUrl = [
     fnName: "員工管理",
     operates: [{ path: "/employee/management/create", localFile: "CreateOrUpdateEmp" }],
   },
+    {
+    path: "/employee-auth/management",
+    fnName: "員工權限管理",
+    // operates: [{ path: "/function/management/create", localFile: "CreateOrUpdatefun" }],
+  },
 ];
 export default routerUrl;
