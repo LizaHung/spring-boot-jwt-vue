@@ -21,4 +21,6 @@ export const apiEmployee = {
 
 export const apiAuthentication = {
     login: (param, callback) => noAuthget('/api/empAuth/login', callback, param ),
+    forgotPsw: (param, callback) => noAuthget('/api/empAuth/forgot', callback, param ),
+    changePsw: (param, callback) => noAuthget('/api/empAuth/change', callback, param ),
 }

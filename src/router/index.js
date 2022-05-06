@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Layout from "../views/layout/Layout";
+import ForgotPsw from "../views/forgot-psw/index";
+import ChangePsw from "../views/forgot-psw/ChangePsw";
 import Login from "../views/login/index";
 import routerUrl from "./RouterUrl";
 import store from "@/store/index.js";
@@ -47,6 +49,16 @@ const routes = [
     path: "/login",
     name: "login", 
     component: Login,
+  },
+  {
+    path: "/forgot-psw",
+    name: "forgot-psw", 
+    component: ForgotPsw,
+  },
+  {
+    path: "/change-psw",
+    name: "change-psw", 
+    component: ChangePsw,
   },
   {
     path: "/",
