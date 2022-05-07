@@ -5,7 +5,7 @@ const modalAction = {
     // {param: "empNo", label: "編號", value:null, isRequired:true, type:'input' },
     {param: "empPhoto", label: "照片", value:null, isRequired:true, type:'photo'},
     {param: "empName", label: "名稱", value:null, isRequired:true, type:'input' },
-    {param: "empNickname", label: "暱稱", value:null, isRequired:true, type:'input' },
+    {param: "empNickname", label: "暱稱", value:null, isRequired:false, type:'input' },
     {param: "empAccount", label: "帳號", value:null, isRequired:true, type:'input' }, 
     {param: "empEmail", label: "信箱", value:null, isRequired:true, type:'input' },
     {param: "empRole", label: "角色", value:null, isRequired:true, type:'select', options:[]},
