@@ -63,7 +63,7 @@
                     v-model="field.value"
                     button-only
                     right
-                    :date-disabled-fn="dateDisabled"
+                    :max="maxDate"
                   ></b-form-datepicker>
                 </b-input-group-prepend>
                 <b-form-input
@@ -100,11 +100,15 @@
                 </div>
                 <hr />
                 <div v-if="mode === 'edit'">
-                  <div>已上傳:</div>
+                  <div>
+                    已上傳: 
+                    <b-icon icon="exclamation-circle-fill" variant="danger" v-b-popover.hover.right="'(上傳兩張以上，才可操作刪除)'"></b-icon>
+                  </div>
                   <span v-for="(item, index) in uploadedImages" :key="index">
                     <template v-if="delImageList.indexOf(item.adoPicNo) === -1">
                       <b-icon
-                        @click="delImagFromDB(item)"
+                        v-if="canDelete"
+                        @click="delImagFromDB(item, index)"
                         icon="x-circle-fill"
                         variant="danger"
                         style="position: absolute"
@@ -163,6 +167,16 @@ export default {
     this.fields[6].options = this.setPetCatOptions(this.$store.getters.getConst.petCat);
     this.fields[8].options = this.setPetCatOptions(this.$store.getters.getConst.location);
   },
+  computed:{
+    maxDate(){
+      let date = new Date()
+      date.setDate(date.getDate()-1)
+      return date
+    },
+    canDelete(){
+      return this.uploadedImages.length >= 2
+    }
+  },
   methods: {
     goBack() {
       this.$router.back(-1);
@@ -202,9 +216,10 @@ export default {
       this.previewImageList.splice(index, 1);
       this.fields[9].value.splice(index, 1);
     },
-    delImagFromDB(item) {
+    delImagFromDB(item, index) {
       this.$nextTick(() => {
         this.delImageList.push(item.adoPicNo);
+        this.uploadedImages.splice(index, 1);
       });
     },
     setFormData(formData) {
@@ -233,9 +248,6 @@ export default {
           },
         });
       });
-    },
-    dateDisabled(ymd, date) {
-      return date >= new Date();
     },
   },
 };
