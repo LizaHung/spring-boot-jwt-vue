@@ -55,6 +55,7 @@ export default new Vuex.Store({
         state.currentUserData[item] = Array.isArray(state.currentUserData[item]) ? [] : null
       })
       sessionStorage.clear();
+      window.location.reload();
     }
   },
   actions: {

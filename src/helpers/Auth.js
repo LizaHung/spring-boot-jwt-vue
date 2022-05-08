@@ -8,6 +8,7 @@ export default {
   setStorage(res) {
     sessionStorage.clear();
     sessionStorage.setItem("token", res.token);
+    sessionStorage.setItem("refreshToken", res.refreshToken);
     sessionStorage.setItem("time", new Date());
   },
   decodeToken(token) {

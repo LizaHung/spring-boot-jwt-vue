@@ -76,6 +76,7 @@ export default {
         { key: "index", label: "序號" },
         { key: "photo", label: "照片" },
         { key: "empName", label: "名稱" },
+        { key: "empAccount", label: "帳號" },
         { key: "empNickname", label: "暱稱" },
         { key: "empAccStatus", label: "帳號狀態", formatter: (value) => {return value === "VALID" ? "有效" : "失效";},},
         { key: "empEmail", label: "信箱" },

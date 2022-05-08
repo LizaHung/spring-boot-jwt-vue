@@ -31,7 +31,6 @@
         <template #cell(index)="row">{{ row.index + 1 }}</template>
         <template #cell(action)="data">
             <b-button class="mr-1" variant="light" size="sm" @click="actionHandler(data.item.empNo)">檢視/修改</b-button>
-            <!-- <b-button class="mr-1" variant="light" size="sm" v-b-modal.auth-modal>檢視/修改</b-button> -->
         </template>
       </b-table>
     </div>
@@ -59,7 +58,6 @@ export default {
       title: "員工權限管理",
         tableField: [
         { key: "index", label: "序號" },
-        { key: "photo", label: "照片" },
         { key: "empName", label: "名稱" },
         { key: "empNickname", label: "暱稱" },
         { key: "empAccStatus", label: "帳號狀態", formatter: (value) => {return value === "VALID" ? "有效" : "失效";},},

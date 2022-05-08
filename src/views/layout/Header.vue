@@ -17,7 +17,6 @@ export default {
   methods: {
     logout() {
       auth.signOut();
-      window.location.reload();
     },
   },
 };
