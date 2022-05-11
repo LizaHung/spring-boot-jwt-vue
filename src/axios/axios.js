@@ -1,6 +1,6 @@
 import axios from "axios";
 import qs from "qs";
-import router from "@/router";
+// import router from "@/router";
 import Vue from "vue";
 import auth from "@/helpers/Auth.js";
 import { apiAuthentication } from "@/axios/apiUrl.js";
@@ -21,8 +21,8 @@ const makeToast = (content) => {
 };
 
 const retryAction = {
-  callback :null
-}
+  callback: null,
+};
 
 const successResponse = (response) => response;
 const interceptor = (error) => {
@@ -39,25 +39,23 @@ const interceptor = (error) => {
           };
           apiAuthentication.refreshToken(tokenData, (res) => {
             auth.setStorage(res);
-            error.config.headers.Authorization = `Bearer ${res.token}`
-            axios.request(error.config).then(response =>{
-              retryAction.callback(response.data)
-              retryAction.callback = null
-            })
+            error.config.headers.Authorization = `Bearer ${res.token}`;
+            axios.request(error.config).then((response) => {
+              retryAction.callback(response.data);
+              retryAction.callback = null;
+            });
           });
         } else {
           auth.signOut();
-          errorMsg = data.message ? data.message : "請重新登入";
-          router.push({
-            name: "login",
-          });
+          errorMsg = data.message ? data.message : "登入授權失效，請重新登入";
         }
         break;
 
       case 404:
         errorMsg = data.message ? data.message : "無效的請求";
         break;
-      default:
+      case 400:  
+      case 500:  
         errorMsg = data.message;
         break;
     }
@@ -65,18 +63,16 @@ const interceptor = (error) => {
   }
 };
 
-authConfig.interceptors.request.use(
-  function (config) {
-      config.headers.Authorization = `Bearer ${sessionStorage.getItem("token")}`;
-    return config;
-  },
-);
+authConfig.interceptors.request.use(function (config) {
+  config.headers.Authorization = `Bearer ${sessionStorage.getItem("token")}`;
+  return config;
+});
 
 authConfig.interceptors.response.use(successResponse, interceptor);
 guestConfig.interceptors.response.use(successResponse, interceptor);
 
 export const get = async (url, callback, params, errorCallback) => {
-  retryAction.callback = callback
+  retryAction.callback = callback;
   const data = qs.stringify(params, { arrayFormat: "indices" });
   return authConfig
     .get(`${url}?${data}`)
@@ -89,7 +85,7 @@ export const get = async (url, callback, params, errorCallback) => {
 };
 
 export const post = async (url, callback, params, errorCallback) => {
-  retryAction.callback = callback
+  retryAction.callback = callback;
   return authConfig
     .post(url, params)
     .then((response) => {
@@ -101,7 +97,7 @@ export const post = async (url, callback, params, errorCallback) => {
 };
 
 export const delhandle = async (url, callback, params, errorCallback) => {
-  retryAction.callback = callback
+  retryAction.callback = callback;
   return authConfig
     .delete(url, params)
     .then((response) => {
@@ -113,7 +109,7 @@ export const delhandle = async (url, callback, params, errorCallback) => {
 };
 
 export const patch = async (url, callback, params, errorCallback) => {
-  retryAction.callback = callback
+  retryAction.callback = callback;
   return authConfig
     .patch(url, params)
     .then((response) => {
@@ -125,7 +121,7 @@ export const patch = async (url, callback, params, errorCallback) => {
 };
 
 export const patchFormData = async (url, callback, params, errorCallback) => {
-  retryAction.callback = callback
+  retryAction.callback = callback;
   return authConfig
     .patch(url, params, {
       headers: {
@@ -141,7 +137,7 @@ export const patchFormData = async (url, callback, params, errorCallback) => {
 };
 
 export const put = async (url, callback, params, errorCallback) => {
-  retryAction.callback = callback
+  retryAction.callback = callback;
   return authConfig
     .put(url, params)
     .then((response) => {

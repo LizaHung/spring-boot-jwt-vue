@@ -8,6 +8,11 @@ const routerUrl = [
     fnName: "領養管理",
   },
   {
+    path: "/adoption/application",
+    fnName: "領養申請",
+    operates: [{ path: "/adoption/application/pdf", localFile: "Application" }],
+  },
+  {
     path: "/adopet/management",
     fnName: "寵物管理",
     operates: [{ path: "/adopet/management/create", localFile: "CreateOrUpdatePet" }],
@@ -17,10 +22,9 @@ const routerUrl = [
     fnName: "員工管理",
     operates: [{ path: "/employee/management/create", localFile: "CreateOrUpdateEmp" }],
   },
-    {
+  {
     path: "/employee-auth/management",
     fnName: "員工權限管理",
-    // operates: [{ path: "/function/management/create", localFile: "CreateOrUpdatefun" }],
   },
 ];
 export default routerUrl;

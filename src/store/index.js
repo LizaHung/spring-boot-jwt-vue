@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "@/router/index.js";
 import { apiGetBackFun, apiEmployee } from "@/axios/apiUrl.js";
 Vue.use(Vuex);
 
@@ -55,7 +56,9 @@ export default new Vuex.Store({
         state.currentUserData[item] = Array.isArray(state.currentUserData[item]) ? [] : null
       })
       sessionStorage.clear();
-      window.location.reload();
+      router.push({
+        name: "login",
+      });
     }
   },
   actions: {

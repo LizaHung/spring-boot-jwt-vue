@@ -25,7 +25,12 @@
         <template #cell(photo)="data">
           <img style="width: 150px" :alt="data.item.petName" :src="`http://localhost:7070/adoption/show/${data.item.adoPetNo}`"/>
         </template>
+        <template #cell(location)="data"> {{ $store.getters.getConst.location[data.item.location] }} </template>
+        <template #cell(petCat)="data"> {{ $store.getters.getConst.petCat[data.item.petCat] }} </template>
         <template #cell(pdf)="data">  <b-button class="mr-1" variant="light" size="sm" @click="pdfReader(data.item.adoPetNo)"> 檢視</b-button> </template>
+        <template #cell(breeder)="data"> 
+          <span>{{data.item.breeder.breederName}} <br> {{data.item.breeder.breederEmail}} <br> {{data.item.breeder.breederPhone}} </span>
+        </template>
         <template #cell(action)="data">
           <template v-if="tabIndex === 0">
             <b-button class="mr-1" variant="light" size="sm" @click="showMsgBox(data.item.adoPetNo)">審核</b-button>
@@ -50,6 +55,7 @@
 import Title from "@/components/Title";
 import modalAction from "./ModalAction";
 import pdfModal from "./PdfModal";
+import { mapGetters } from "vuex";
 export default {
   components: { Title, pdfModal },
   data() {
@@ -71,8 +77,8 @@ export default {
         { key: "petCat", label: "分類" },
         { key: "location", label: "探訪地點", },
         { key: "pdf", label: "申請書" },
-        { key: "member", label: "領養人" },
-        { key: "employee", label: "審核管理員" },
+        { key: "breeder", label: "領養人" },
+        { key: "employee.empName", label: "審核管理員" },
         { key: "action", label: "操作" },
       ],
       petList: null,
@@ -83,6 +89,9 @@ export default {
   },
   created() {
     this.getAllPets('PROCESSING')
+  },
+  computed: {
+    ...mapGetters(["getCurrentUserData"]),
   },
   methods: {
     getAllPets(status){
@@ -112,7 +121,11 @@ export default {
         })
         .then((value) => {
           if (!value) return;
-          modalAction.confirm( adoPetNo, () => {
+          let data = {
+            'adoPetNo' : adoPetNo,
+            'empNo': this.getCurrentUserData.empNo
+          };
+          modalAction.confirm( data, () => {
             this.makeToast("審核成功");
             this.getAllPets("ADOPTED")
           });
