@@ -1,0 +1,90 @@
+
+// btn
+.btn-outline-info, .btn-light {
+  color: #fff;
+  background-color: #888;
+  border-color: #888;
+}
+
+// card
+.card {
+  margin-bottom: .5em;
+  .gray-bg {
+    background-color: #edf1f5;
+    border: 1px solid #e0e0e2;
+    font-size: 14px;
+  }
+  .card-header {
+    position: relative;
+    .card-title {
+      margin: 0;
+      font-weight: bold;
+    }
+    .card-tools {
+      position: absolute;
+      right: 8px;
+      top: 8px;
+      > * {
+        margin: 0 4px;
+        cursor: pointer;
+      }
+      .close-tag {
+        outline-width: 0!important;
+      }
+    }
+  }
+}
+
+//form
+.isRequired {
+  > label {
+    &:before{
+      content: '*';
+      margin-right: 2px;
+      color: red;
+    }
+  }
+}
+
+//table
+.b-table {
+  font-size: 14px !important;
+  thead th {
+    vertical-align: middle;
+  }
+}
+.light-table {
+  th, .th {
+    background-color: #e3e3e3;
+    color: #606266;
+  }
+}
+
+
+//common
+
+.bi-x-circle-fill {
+  cursor: pointer;
+}
+
+
+.border-color {
+  border: 1px solid #4F4F4F;
+}
+
+.pagination { 
+  margin-left: 1em;
+  color: #fff;
+  .page-link {
+    color:  #888 !important;  
+  }
+  .page-item.active .page-link {
+    color:  #fff !important;
+    background-color: #797979 ;
+    border-color: #E8E9EC !important;
+  }
+}
+
+.c-bg-header-dark {
+  background-color: #f8f9fa
+}
