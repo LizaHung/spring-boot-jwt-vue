@@ -35,9 +35,10 @@
                   </span>
                 </div>
                 <div class="text-center">
-                  <button :disabled="submitted" class="btn btn-primary" type="submit" @click="forgotHandle">
+                  <button :disabled="submitted" class="btn btn-primary mx-1" type="submit" @click="forgotHandle">
                     {{ buttonText }}
                   </button>
+                  <button  class="btn btn-primary mx-1"  @click="goBack"> 返回</button>
                 </div>
               </div>
             </div>
@@ -78,6 +79,9 @@ export default {
         });
       });
     },
+    goBack(){
+      this.$router.push("/login");
+    }
   },
 };
 </script>

@@ -1,6 +1,10 @@
 <template>
-  <div class="sb-topnav navbar navbar-expand c-bg-blue-dark navbar-light shadow-sm">
-    <h3>Work Hard, Play Hard!</h3>
+  <div class="sb-topnav navbar shadow-sm c-bg-header-dark">
+    <div class="h-100">
+      <router-link :to="'/home'" class="nav-item h-100" active-class="is-active" :title="'Petfect Match'">
+        <img :alt="'petfect match'" :src="require('@/assets/' + jpg)" class="h-100" />
+      </router-link>
+    </div>
     <div class="d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       <span style="color: #2082d9; cursor: pointer" @click="logout"> logout</span>
     </div>
@@ -12,7 +16,9 @@ import auth from "@/helpers/Auth.js";
 export default {
   name: "Header",
   data() {
-    return {};
+    return {
+      jpg: "logo.png",
+    };
   },
   methods: {
     logout() {
@@ -21,3 +27,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+.h-100 {
+  height: 100%;
+}
+</style>

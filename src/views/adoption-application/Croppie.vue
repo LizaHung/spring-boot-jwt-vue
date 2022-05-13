@@ -76,12 +76,10 @@ export default {
 
       this.$refs.croppieRef.result(idRight, (output) => {
         this.$emit("croppedImg", output);
-        console.log("emit croppedImg");
       });
 
       this.$refs.croppieRef.result(options, (output) => {
         this.cropped = this.croppieImage = output;
-        console.log(this.croppieImage);
       });
     },
     resetModal() {

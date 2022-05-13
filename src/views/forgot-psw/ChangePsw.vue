@@ -37,6 +37,7 @@
                 </div>
                 <div class="text-center">
                   <button class="btn btn-primary" type="submit" @click="changeHandle">確認</button>
+                  <button  class="btn btn-primary mx-1"  @click="goBack"> 返回</button>
                 </div>
               </div>
             </div>
@@ -88,6 +89,9 @@ export default {
         name: "forgot-psw",
       });
     },
+    goBack(){
+      this.$router.push("/login");
+    }
   },
 };
 </script>

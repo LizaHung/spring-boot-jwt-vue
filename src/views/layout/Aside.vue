@@ -29,3 +29,9 @@ export default {
   },
 };
 </script>
+<style scoped>
+.nav-item_link {
+  text-decoration: none;
+  color:#333
+}
+</style>
