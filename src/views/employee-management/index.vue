@@ -37,7 +37,7 @@
         :filter-included-fields="filterOn">
         <template #cell(index)="row">{{ row.index + 1 }}</template>
         <template #cell(photo)="data">
-            <img style="width: 150px" :alt="data.item.petName" :src="`http://localhost:7070/employees/show/${data.item.empNo}`"/>
+            <img style="width: 150px" :alt="data.item.petName" :src="`${$store.getters.getBackendHost}/employees/show/${data.item.empNo}`"/>
         </template>
         <template #cell(action)="data">
           <template v-if="tabIndex === 0">

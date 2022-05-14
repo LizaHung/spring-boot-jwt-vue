@@ -69,6 +69,7 @@ export default {
     loginHandle() {
       if (!this.$refs.form.checkValidity()) return;
       apiAuthentication.login(this.userData, (res) => {
+        auth.getHost()
         auth.setStorage(res);
         auth.decodeToken(res.token);
         auth.setFuntion();

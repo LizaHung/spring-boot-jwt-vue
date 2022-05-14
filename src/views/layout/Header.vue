@@ -6,6 +6,7 @@
       </router-link>
     </div>
     <div class="d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+      <span class="mr-1"> Hi {{$store.getters.getCurrentUserData.empName}}</span>
       <span style="color: #2082d9; cursor: pointer" @click="logout"> logout</span>
     </div>
   </div>

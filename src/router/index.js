@@ -99,6 +99,7 @@ router.beforeEach((to, from, next) => {
     } else if (!store.getters.getCurrentUserData.empNo) {  //for page refresh
       auth.decodeToken(sessionStorage.getItem("token"));
       auth.setFuntion();
+      auth.getHost()
       next();
     } else {
       next();

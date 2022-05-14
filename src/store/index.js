@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import router from "@/router/index.js";
-import { apiGetBackFun, apiEmployee } from "@/axios/apiUrl.js";
+import { apiGetBackFun, apiEmployee, apiAuthentication } from "@/axios/apiUrl.js";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -15,7 +15,7 @@ export default new Vuex.Store({
     },
     const: {
       emptyText: "查無資料",
-      perPage: 5,
+      perPage: 10,
       dateFormat: "YYYY-MM-DD",
       dateTimeFormat: "YYYY-MM-DD HH:mm:ss",
       petCat: {
@@ -37,6 +37,7 @@ export default new Vuex.Store({
       },
       allFun: [],
     },
+    backendHost:null
   },
   mutations: {
     setAllFunction(state, data) {
@@ -46,10 +47,15 @@ export default new Vuex.Store({
       state.currentUserData.role = data.role;
       state.currentUserData.account = data.account;
       state.currentUserData.empNo = data.empNo;
-      state.currentUserData.empName = data.sub;
     },
     setAuthFun(state, data) {
       state.currentUserData.authFun =  state.const.allFun.filter(({ funNo: funNo }) => data.some(({ funNo: funNo2 }) => funNo === funNo2));
+    },
+    setHost(state, data) {
+      state.backendHost =  process.env.VUE_APP_PROXY_HOST.indexOf(data) > -1 ? `http://${data}` : `http://${data}:7070`
+    },
+    setUserName(state, data) {
+      state.currentUserData.empName = data.empName;
     },
     signOut(state){
       Object.keys(state.currentUserData).forEach(item=>{
@@ -86,9 +92,36 @@ export default new Vuex.Store({
           });
       });
     },
+    callHost({ commit }) {
+      return new Promise((resolve, reject) => {
+        apiAuthentication
+          .getHost((res) => {
+            commit("setHost", res);
+            resolve();
+          })
+          .catch((error) => {
+            console.log(error);
+            reject(error);
+          });
+      });
+    },
+    callUserDetail({ commit }, empNo) {
+      return new Promise((resolve, reject) => {
+        apiEmployee
+          .getEmpInfo(empNo, (res) => {
+            commit("setUserName", res);
+            resolve();
+          })
+          .catch((error) => {
+            console.log(error);
+            reject(error);
+          });
+      });
+    },
   },
   getters: {
     getConst: (state) => state.const,
     getCurrentUserData: (state) => state.currentUserData,
+    getBackendHost: (state) => state.backendHost,
   },
 });

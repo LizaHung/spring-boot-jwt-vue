@@ -54,8 +54,8 @@ const interceptor = (error) => {
       case 404:
         errorMsg = data.message ? data.message : "無效的請求";
         break;
-      case 400:  
-      case 500:  
+      case 400:
+      case 500:
         errorMsg = data.message;
         break;
     }
@@ -148,7 +148,7 @@ export const put = async (url, callback, params, errorCallback) => {
     });
 };
 
-export const noAuthget = async (url, callback, params, errorCallback) => {
+export const noAuthpost = async (url, callback, params, errorCallback) => {
   return guestConfig
     .post(url, params, {})
     .then((response) => {
@@ -156,5 +156,17 @@ export const noAuthget = async (url, callback, params, errorCallback) => {
     })
     .catch((e) => {
       if (errorCallback) errorCallback(e);
+    });
+};
+
+export const noAuthget = async (url, callback, params, errorCallback) => {
+  const data = qs.stringify(params, { arrayFormat: "indices" });
+  return guestConfig
+    .get(`${url}?${data}`)
+    .then((res) => {
+      if (callback) callback(res.data);
+    })
+    .catch((error) => {
+      if (errorCallback) errorCallback(error);
     });
 };

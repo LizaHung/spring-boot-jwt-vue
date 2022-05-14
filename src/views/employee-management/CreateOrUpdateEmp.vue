@@ -68,7 +68,7 @@
                   <img
                     :alt="field.param"
                     class="mr-2"
-                    :src="`http://localhost:7070/employees/show/${$route.params.data.empNo}`"
+                    :src="`${$store.getters.getBackendHost}/employees/show/${$route.params.data.empNo}`"
                     width="200"/>
                   <hr />
                 </div>

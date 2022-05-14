@@ -117,7 +117,7 @@
                       <img
                         :alt="`${item}+${index}`"
                         class="mr-2"
-                        :src="`http://localhost:7070/adoption/show/?adopetNo=${item.adoPetNo}&adoPicNo=${item.adoPicNo}`"
+                        :src="`${$store.getters.getBackendHost}/adoption/show/?adopetNo=${item.adoPetNo}&adoPicNo=${item.adoPicNo}`"
                         width="200"
                       />
                     </template>

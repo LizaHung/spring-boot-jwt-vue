@@ -23,7 +23,7 @@
           <img
             style="width: 150px"
             :alt="data.item.petName"
-            :src="`http://localhost:7070/adoption/show/${data.item.adoPetNo}`"
+            :src="`${$store.getters.getBackendHost}/adoption/show/${data.item.adoPetNo}`"
           />
         </template>
         <template #cell(petCat)="data"> {{ $store.getters.getConst.petCat[data.item.petCat] }} </template>

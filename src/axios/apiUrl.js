@@ -1,4 +1,4 @@
-import { noAuthget, get, post, put, delhandle, patch} from "./axios";
+import { noAuthget, get, post, put, delhandle, patch, noAuthpost} from "./axios";
 
 export const apiAddEmp = (params, callback, errorCallback) => noAuthget('/api/empAuth/sign-in', callback, params, errorCallback )
 export const apiGetBackFun = (callback) => get('/api/function', callback )
@@ -13,6 +13,7 @@ export const apiAdoption = {
 }
 export const apiEmployee = {
     getAllByParams:  (param,callback) => get(`/api/employees/searchEmp`, callback , param),
+    getEmpInfo:  (empNo,callback) => get(`/api/employees/${empNo}`, callback),
     addEmp:  (param, callback) => post('/api/employees', callback, param ),
     updateEmp:  (param, callback) => put('/api/employees', callback, param ),
     updateEmpAccStatus:  (empNo, callback) => patch(`/api/employees/${empNo}`, callback ),
@@ -21,8 +22,9 @@ export const apiEmployee = {
 }
 
 export const apiAuthentication = {
-    login: (param, callback) => noAuthget('/api/empAuth/login', callback, param ),
-    forgotPsw: (param, callback) => noAuthget('/api/empAuth/forgot', callback, param ),
-    changePsw: (param, callback) => noAuthget('/api/empAuth/change', callback, param ),
-    refreshToken: (param, callback) => noAuthget('/api/empAuth/refreshToken', callback, param ),
+    login: (param, callback) => noAuthpost('/api/empAuth/login', callback, param ),
+    forgotPsw: (param, callback) => noAuthpost('/api/empAuth/forgot', callback, param ),
+    changePsw: (param, callback) => noAuthpost('/api/empAuth/change', callback, param ),
+    refreshToken: (param, callback) => noAuthpost('/api/empAuth/refreshToken', callback, param ),
+    getHost: (callback) => noAuthget('/api/empAuth', callback),
 }
