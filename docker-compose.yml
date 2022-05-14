@@ -1,0 +1,17 @@
+version: '3'
+services:
+  backend:
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./backend
+    ports:
+      - '7070:7070'
+    environment:
+      - MAIL_PASSWORD=${MAIL_PASSWORD}
+      - EMAIL=${EMAIL}
+  frontend:
+    build:    
+      dockerfile: Dockerfile.dev
+      context: .
+    ports:
+      - '9001:80'
