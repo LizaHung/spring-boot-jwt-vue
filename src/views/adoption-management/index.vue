@@ -33,7 +33,8 @@
         </template>
         <template #cell(action)="data">
           <template v-if="tabIndex === 0">
-            <b-button class="mr-1" variant="light" size="sm" @click="showMsgBox(data.item.adoPetNo)">審核</b-button>
+            <b-button class="mr-1 mx-1 mb-1" variant="light" size="sm" @click="showMsgBox(data.item.adoPetNo)">審核</b-button>
+            <b-button class="mr-1 mx-1" variant="light" size="sm" @click="pdfApply(data.item)">重新提交</b-button>
           </template>
             <span v-else>--</span>
         </template>
@@ -134,7 +135,15 @@ export default {
     pdfReader(adoPetNo){
       this.pdfInfo = adoPetNo
       this.$bvModal.show('pdf-modal')
-    }
+    },
+    pdfApply(adoPet) {
+      this.$router.push({
+        name: "adoption-application-pdf",
+        params: {
+          data: adoPet,
+        },
+      });
+    },
   },
 };
 </script>
