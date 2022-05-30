@@ -61,6 +61,7 @@ const interceptor = (error) => {
     }
     if (errorMsg) makeToast(errorMsg);
   }
+  return Promise.reject(error)
 };
 
 authConfig.interceptors.request.use(function (config) {
