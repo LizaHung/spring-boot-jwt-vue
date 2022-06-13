@@ -23,7 +23,7 @@
         hover>
         <template #cell(index)="row">{{row.index + 1}}</template>
         <template #cell(photo)="data">
-          <img style="width: 150px" :alt="data.item.petName" :src="`http://localhost:7070/adoption/show/${data.item.adoPetNo}`"/>
+          <img style="width: 150px" :alt="data.item.petName" :src="`${$store.getters.getBackendHost}/adoption/show/${data.item.adoPetNo}`"/>
         </template>
         <template #cell(location)="data"> {{ $store.getters.getConst.location[data.item.location] }} </template>
         <template #cell(petCat)="data"> {{ $store.getters.getConst.petCat[data.item.petCat] }} </template>
