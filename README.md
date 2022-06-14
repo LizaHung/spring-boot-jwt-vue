@@ -28,7 +28,8 @@ The front-end using Vue with Vuex for state management and axios.
 ### Prerequisites    
 
 
-> **To send an email using gmail smtp, please visit: https://www.google.com/settings/security/lesssecureapps and enable "Allow less secure applications".**
+> **To send an email using gmail smtp, please turn on [Google’s 2-Step Verification](https://support.google.com/accounts/answer/185839). 
+> Then, visit: [https://www.google.com/settings/security/lesssecureapps](https://myaccount.google.com/apppasswords) to generate an App Password in Gmail.**
 
 
 ### Get started with Docker Compose     
@@ -49,9 +50,9 @@ docker-machine ip xxx
 ```
 
 4. Going into the root of spring-boot-jwt-vue directory which contains the docker-compose.yml and 
-passing your email address and password in the command below. Compose will start and run entire app.
+passing your email address and app password in the command below. Compose will start and run entire app.
 ```
-MAIL_PASSWORD=xxxx EMAIL=xxxx@gmail.com docker-compose up --build
+MAIL_PASSWORD=<your app password in gmail> EMAIL=<your gmail address> docker-compose up --build
 ```
 5. Passing your host ip address from step 3 with 9001 port to visit front-end login page. 
 ```
@@ -62,10 +63,10 @@ host IP address:9001
 
 * back-end:
 
-Run a jar file and fill in your email address and password in the command below. 
+Run a jar file and fill in your email address and app password in the command below. 
 
 ```
-java -Dfile.encoding=UTF-8  -jar ./backend/adoption-0.0.2-SNAPSHOT.jar  --MAIL_PASSWORD=xxxx  --EMAIL=xxxx@gmail.com
+java -Dfile.encoding=UTF-8  -jar ./backend/adoption-0.0.2-SNAPSHOT.jar  --MAIL_PASSWORD=<your app password in gmail>  --EMAIL=<your gmail address>
 ```
 
 
