@@ -29,7 +29,7 @@ The front-end using Vue with Vuex for state management and axios.
 
 
 > **To send an email using gmail smtp, please turn on [Google’s 2-Step Verification](https://support.google.com/accounts/answer/185839). 
-> Then, visit: [https://www.google.com/settings/security/lesssecureapps](https://myaccount.google.com/apppasswords) to generate an App Password in Gmail.**
+> Then, visit: [https://myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords) to generate an App Password in Gmail.**
 
 
 ### Get started with Docker Compose     
